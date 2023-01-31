@@ -11,8 +11,9 @@ import RadioGroup from './components/RadioGroup';
 import Progressbar from './components/Progressbar';
 import Sliders from './components/Sliders';
 import Textfields from './components/Textfields';
+import Title from './components/Title';
 
-import './App.css';
+import './App.scss';
 
 export default function App() {
   const renderDialog = () => {
@@ -35,6 +36,7 @@ export default function App() {
 
   return (
     <div className="panel">
+      <Title />
       <Typography />
       <Spectrum.Divider size="medium" />
       <div className="element">

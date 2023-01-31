@@ -1,5 +1,6 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = function(_env, argv) {
@@ -20,7 +21,7 @@ module.exports = function(_env, argv) {
     },
     resolve: {
       modules: [path.resolve(__dirname, 'node_modules')],
-      extensions: ['.ts', '.tsx', '.js', 'jsx', '.css'],
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.css'],
     },
     module: {
       rules: [
@@ -42,8 +43,9 @@ module.exports = function(_env, argv) {
           ],
         },
         {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader'],
+          // test: /\.s[ac]ss$/i, sass or scss
+          test: /\.(s[ac]|c)ss$/i, // css and scss/sass
+          use: ['style-loader', 'css-loader', 'sass-loader'],
         },
       ],
     },
@@ -52,6 +54,8 @@ module.exports = function(_env, argv) {
       new CopyPlugin(['plugin'], {
         copyUnmodified: true,
       }),
+      // TODO needs to be set
+      new MiniCssExtractPlugin(),
     ],
   };
 };
